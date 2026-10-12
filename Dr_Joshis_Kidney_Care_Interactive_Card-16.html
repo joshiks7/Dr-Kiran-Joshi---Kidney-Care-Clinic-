@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#174574">
+<title>Dr Joshi's Kidney Care Clinic</title>
+<style>
+  :root { --navy:#174574; --blue:#2468B4; --orange:#E66B2E; --pale-blue:#EAF4FC; --pale-peach:#FFF2E7; --pale-green:#ECF7EE; --ink:#242B33; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:24px 14px; background:#f5f7fa; color:var(--ink); font-family:Arial,Helvetica,sans-serif; }
+  main { max-width:900px; margin:0 auto; background:#fff; border:1px solid #e7ebef; border-radius:24px; padding:clamp(20px,4vw,44px); box-shadow:0 8px 28px rgba(23,69,116,.08); }
+  header { text-align:center; padding:4px 0 22px; }
+  h1 { margin:0; line-height:1.08; font-size:clamp(34px,7vw,60px); letter-spacing:-1.2px; color:var(--navy); }
+  h1 span { display:block; color:var(--orange); margin-top:5px; }
+  .doctor { font-size:clamp(22px,4vw,32px); font-weight:700; margin-top:16px; }
+  .rule { height:4px; background:var(--orange); border-radius:8px; margin:0 0 22px; }
+  .panel { border-radius:18px; padding:clamp(18px,3vw,28px); margin-top:14px; }
+  .address { background:var(--pale-peach); display:flex; gap:18px; align-items:flex-start; }
+  .pin { color:var(--orange); font-size:36px; line-height:1; flex:0 0 auto; }
+  .section-label { font-size:clamp(16px,2.5vw,20px); font-weight:700; color:var(--navy); margin-bottom:8px; }
+  .address-text { font-size:clamp(18px,3.4vw,27px); line-height:1.42; }
+  .contact { display:flex; align-items:center; gap:18px; text-decoration:none; color:inherit; border-radius:16px; padding:clamp(17px,3vw,24px); margin-top:12px; min-height:100px; transition:transform .12s ease, box-shadow .12s ease; }
+  .contact:focus-visible,.map:focus-visible { outline:3px solid var(--orange); outline-offset:3px; }
+  .contact:hover,.map:hover { box-shadow:0 4px 16px rgba(23,69,116,.10); transform:translateY(-1px); }
+  .contact.blue { background:var(--pale-blue); }
+  .contact.green { background:var(--pale-green); }
+  .symbol { width:52px; flex:0 0 52px; text-align:center; font-size:34px; }
+  .number { font-size:clamp(25px,5.2vw,42px); font-weight:800; color:var(--blue); letter-spacing:.2px; line-height:1.15; overflow-wrap:anywhere; }
+  .green .number { color:#167B40; }
+  .hint { margin-top:5px; font-size:clamp(15px,2.7vw,20px); color:#3c454e; }
+  .map { display:flex; align-items:center; gap:18px; text-decoration:none; color:var(--navy); background:var(--pale-peach); border-radius:16px; padding:clamp(18px,3vw,26px); margin-top:14px; }
+  .map-icon { color:var(--orange); font-size:34px; flex:0 0 auto; }
+  .map-title { font-size:clamp(19px,3.5vw,27px); font-weight:700; }
+  .map-sub { color:var(--blue); font-size:clamp(15px,2.5vw,19px); margin-top:6px; text-decoration:underline; overflow-wrap:anywhere; }
+  .arrow { margin-left:auto; color:var(--orange); font-size:34px; }
+  footer { text-align:center; color:#6b747d; font-size:13px; margin-top:22px; }
+  @media (max-width:480px) { body {padding:10px 8px;} main {padding:18px 14px;border-radius:18px;} .contact {gap:12px;} .symbol {width:36px;flex-basis:36px;font-size:28px;} .address {gap:12px;} .map {gap:12px;} }
+  @media print { body {background:#fff;padding:0;} main {box-shadow:none;border:0;max-width:none;} .contact:hover,.map:hover {transform:none;box-shadow:none;} }
+
+  /* Compact layout for a phone screen: reduce padding and type so the card fits with minimal/no scrolling. */
+  @media screen and (max-width: 480px) and (max-height: 900px) {
+    body { padding: 5px; }
+    main { padding: 12px 11px; border-radius: 14px; }
+    header { padding: 2px 0 14px; }
+    h1 { font-size: clamp(27px, 7.3vw, 35px); letter-spacing: -.4px; }
+    h1 span { margin-top: 3px; }
+    .doctor { font-size: 21px; margin-top: 9px; }
+    .rule { height: 3px; margin-bottom: 13px; }
+    .panel { border-radius: 13px; padding: 16px 13px; margin-top: 10px; }
+    .address { gap: 11px; }
+    .pin { font-size: 27px; }
+    .section-label { font-size: 15px; margin-bottom: 6px; }
+    .address-text { font-size: 17px; line-height: 1.38; }
+    .contact { gap: 11px; border-radius: 12px; padding: 14px 11px; margin-top: 9px; min-height: 0; }
+    .symbol { width: 30px; flex-basis: 30px; font-size: 23px; }
+    .number { font-size: clamp(23px, 5.8vw, 27px); line-height: 1.08; }
+    .hint { margin-top: 4px; font-size: 13px; }
+    .map { gap: 11px; border-radius: 12px; padding: 15px 12px; margin-top: 9px; }
+    .map-icon { font-size: 25px; }
+    .map-title { font-size: 18px; }
+    .map-sub { font-size: 13px; margin-top: 4px; }
+    .arrow { font-size: 27px; }
+    footer { font-size: 11px; margin-top: 10px; }
+  }
+  @media screen and (max-width: 480px) and (max-height: 760px) {
+    body { padding: 3px; }
+    main { padding: 9px; }
+    header { padding-bottom: 7px; }
+    .doctor { margin-top: 5px; }
+    .panel { padding: 8px; margin-top: 5px; }
+    .contact { padding: 7px 9px; margin-top: 5px; }
+    .map { padding: 8px 9px; margin-top: 5px; }
+    footer { margin-top: 5px; }
+  }
+
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Dr Joshi’s <span>Kidney Care Clinic</span></h1>
+    <div class="doctor">Dr Kiran Joshi</div>
+  </header>
+  <div class="rule"></div>
+  <section class="panel address" aria-label="Clinic address">
+    <div class="pin" aria-hidden="true">📍</div>
+    <div>
+      <div class="section-label">Clinic Address</div>
+      <div class="address-text">Nath Sankul Apartment Complex (1st Floor), in front of Adke Hospital, North Sadar Bazaar, Bedar Pul, Solapur – 413003</div>
+    </div>
+  </section>
+  <a class="contact blue" href="tel:+912172326662" aria-label="Call 0217 2326662">
+    <div class="symbol" aria-hidden="true">📞</div><div><div class="number">0217 2326662</div><div class="hint">Tap to call</div></div>
+  </a>
+  <a class="contact blue" href="tel:+919552326662" aria-label="Call 955 2326662">
+    <div class="symbol" aria-hidden="true">📞</div><div><div class="number">955 2326662</div><div class="hint">Tap to call</div></div>
+  </a>
+  <a class="contact blue" href="tel:+919860320662" aria-label="Call 98603 20662">
+    <div class="symbol" aria-hidden="true">📞</div><div><div class="number">98603 20662</div><div class="hint">Tap to call</div></div>
+  </a>
+  <a class="contact green" href="https://wa.me/919552326662" aria-label="Open WhatsApp for 955 2326662">
+    <div class="symbol" aria-hidden="true">🟢</div><div><div class="number">955 2326662</div><div class="hint">Tap to open WhatsApp</div></div>
+  </a>
+  <a class="map" href="https://maps.app.goo.gl/wEnTJ4bdpaQXo6c26?g_st=aw" target="_blank" rel="noopener" aria-label="Open clinic location in Google Maps">
+    <div class="map-icon" aria-hidden="true">📍</div><div><div class="map-title">Open Clinic Location</div><div class="map-sub">View in Google Maps</div></div><div class="arrow" aria-hidden="true">›</div>
+  </a>
+  <footer>Tap a phone number, WhatsApp contact, or map panel to open the relevant app.</footer>
+</main>
+</body>
+</html>
